@@ -132,6 +132,13 @@ WIZnetInterface eth;
 #include "DHCPClient.h"
 DHCPClient dhcp;
 
+#elif MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_W5500
+#include "WIZnetInterface.h"
+#include "W5500.h"
+WIZnetInterface eth(SPI_MOSI, SPI_MISO, SPI_SCK, SPI_CS, LED1);
+
+#include "DHCPClient.h"
+DHCPClient dhcp;
 
 #else
 #error "No connectivity method chosen. Please add 'config.network-interfaces.value' to your mbed_app.json (see README.md for more information)."
@@ -297,7 +304,7 @@ NetworkInterface* easy_connect(bool log_messages) {
 #   endif
     connect_success = eth.connect();
 
-#elif MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_WIZNET
+#elif (MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_WIZNET) || (MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_W5500)
     if (log_messages) {
         printf("[EasyConnect] Using Ethernet WIZnet\n");
     }
@@ -489,7 +496,7 @@ NetworkInterface* easy_get_netif(bool log_messages) {
     }
     return  &wnc;
 
-#elif MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_WIZNET
+#elif (MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_WIZNET) || (MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_W5500)
     if (log_messages) {
         printf("[EasyConnect] ETHERNET WIZNET\n");
     }

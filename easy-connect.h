@@ -21,6 +21,8 @@
 #include "mbed.h"
 
 #define ETHERNET          1
+#define ETERNET_W5500     2
+#define ETHERNET_WIZNET   3
 #define WIFI_ESP8266      11
 #define WIFI_ODIN         12
 #define WIFI_RTW          13
