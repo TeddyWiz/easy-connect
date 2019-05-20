@@ -125,20 +125,34 @@ WNC14A2AInterface wnc(&dbgout);
 WNC14A2AInterface wnc;
 #endif
 
-#elif MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_WIZNET
-#include "WIZnetInterface.h"
-WIZnetInterface eth;
-
-#include "DHCPClient.h"
-DHCPClient dhcp;
-
-#elif MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_W5500
+#elif (MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_WIZNET) || (MBED_CONF_APP_NETWORK_INTERFACE == ETHERNET_W5500)
 #include "WIZnetInterface.h"
 #include "W5500.h"
 WIZnetInterface eth(SPI_MOSI, SPI_MISO, SPI_SCK, SPI_CS, LED1);
 
+
 #include "DHCPClient.h"
 DHCPClient dhcp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\
+
+
+
 
 #else
 #error "No connectivity method chosen. Please add 'config.network-interfaces.value' to your mbed_app.json (see README.md for more information)."
